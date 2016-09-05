@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Streamgraph</title>
+    <script src="http://d3js.org/d3.v4.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+</head>
+<style type="text/css">
+.chart{
+    text-align: center;
+    width:100%;
+    margin-bottom: 60px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.viz{
+    text-align: center;
+    border: none !important;
+    
+}
+.container-fluid{
+    border-bottom: 1px solid grey;
+}
+h1{
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 40px
+}
+body{
+   
+  font-family: 'Open Sans', sans-serif;
+
+    font-weight: 200px;
+}
+p{
+    text-align: justify;
+}
+path{
+    stroke:white;
+    stroke-width:1.5;
+}
+.writeUp{
+    text-align: justify;
+    width:1000px;
+    
+}
+.howto{
+    width: 1000px;
+    text-align: justify;
+    margin-bottom: 60px;
+}
+.explanation{
+    width: 1000px;
+    text-align: justify;
+    margin-bottom: 60px;
+}
+
+.writeUp{
+    
+    text-align: justify;
+}
+.writeUp p{
+    
+    color:black;
+}
+.ihavenoideawhyineedthisidontunderstandcssanymore{
+    text-align: center;
+    
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.timeline{
+    border: none !important;
+    text-align: left;
+    
+}
+.title{
+    color: black;
+   
+   font-size: 60px;
+}
+mark{
+    background-color: #FF6B6B;
+    color: white;
+}
+a{
+    font-color: white;
+}
+line{
+    stroke: black;
+    stroke-width:2px;
+}
+.xaxis p{
+    align: left;
+    font-size: 15px;
+}
+{
+    width: 1200px;
+}
+.alter{
+    width: 1200px;
+}
+.bot{
+       width: 1000px;
+}
+.bottom p{
+    color: white;
+}
+.bottom{
+ 
+    text-align: center;
+    background-color: black;
+}
+.details{
+    text-align: center;
+    width: 1000px;
+}
+.about{
+     width: 1000px;
+    text-align: justify;
+    margin-bottom: 60px;
+    border-bottom: none !important;
+}
+</style>
+
+<body>
+    
+    <div class="timeline container-fluid">
+            <h1 class="title" ><u >Graphic Design Timeline</u></h1>
+    </div>
+    <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
+        <div class="writeUp container-fluid">
+        <p class="lead"><mark>Graphic Design</mark> has always been a rapidly evolving field. Its examples can be found in the hundreds of drawings of animals in the Chauvet caves, dating back to 14,000 BC to the designs of the primitive hunters in the Bhimkbekta rock shelters in India. Examples can be found in religious text like the Qu'ran. Early maps and calligraphy specimens are some of the various examples of graphic design from history.</p>
+        <p class="lead"> The past 200 years have been especially active in terms of graphic design movements and schools with the schools and designers around the world continuously innovating and changing the field. Designers and artists around the world were continuously changing the way people saw things.</p>
+        <p class="lead">The purpose of this visualization is to throws light and show some of the more popular design movements since 1930. This is by no means an exhaustive list and there are many more that were very niche and localised to certain geographic regions which I did not find sufficient data for and hence did not show them here.</p>
+        </div>
+</div>
+    
+    <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
+    <div class="howto container-fluid">
+        <h2 style="text-align:left; color:black;">How to read this visualization</h2>
+        <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
+    </div>
+</div>
+    
+<div class="container-fluid viz">
+    <div class="chart" >
+        <div class="container alter" style="text-align:left;">
+            <div class="row xaxis">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4"><p >1930</p></div>
+                        <div class="col-md-4"><p>1940</p></div>
+                        <div class="col-md-4"><p>1950</p></div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4"><p>1960</p></div>
+                        <div class="col-md-4"><p>1970</p></div>
+                        <div class="col-md-4"><p>1980</p></div>
+                    </div>                            
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-4"><p>1990</p></div>
+                        <div class="col-md-4"><p>2000</p></div>
+                        <div class="col-md-4"><p>2010</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ihavenoideawhyineedthisidontunderstandcssanymore">
+    <div class="explanation container-fluid">
+        <h2 style="text-align:left; color:black;">Explanation</h2>
+        <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- D3.js and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this graphic for that year. So, essentially, this visualization represents the shown movements <mark>relative to each other</mark>. </p>
+        <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="www.artsy.com" >Artsy</a> and <a href="www.wikiart.org" role="button">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
+        <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my github repo.</p>
+    </div>
+</div>
+        <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
+    <div class="about container-fluid">
+        <h3 style="text-align:left; color:black;">About Me</h3>
+        <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am really interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
+        <p class="lead">Find me on my <a href="be.net/manshar">behance profile</a> or email me at- sharma.manas271196@gmail.com</p>
+        
+    </div>
+</div>
+</body>
+    
+<script>
+    var num = 9;
+    var years=86;
+    var colours=["#4EC6E4","#70C27E","#99C76B","#FFC533","#F9C89E","#F9B17B","#CB6C67","#F0903E","#FFC533"];
+   
+    width = 1200,
+    height = 360;
+    var dataset=[];
+    d3.csv("data.csv",function(data){
+        dataset=data;
+        makechart();
+    });
+    var svg,g,area;
+    //debugger;
+    function makechart(){
+    streamgraph=d3.stack().keys(["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"]);
+    names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    //debugger;
+    stream=streamgraph(dataset);
+    
+    //debugger;
+    g=d3.select(".chart").append("svg").append("g");
+    text=d3.select("body").append("text");
+    svg=d3.select("svg");
+    maxy=d3.max(stream,function (d){
+        return d3.max(d,function (d){
+            return d[0];
+        });
+    });
+    var line=d3.select("svg").insert("line");
+    //svg.append("g");
+    //debugger;
+    svg.attr("width",width).attr("height",height);
+    area=d3.area().x(function (d){return width*(+d.data.Year-1930)/years}).y0(function (d){return height-d[0]*height/maxy;}).y1(function (d){return height-d[1]*height/maxy;}).curve(d3.curveBasis);
+    //debugger;/
+        var path = g.selectAll("path").data(stream).enter().append("path").attr("class","area").attr("d",function (d){
+            return area(d);}).style("fill",function (d,i){return colours[i];}).on("mouseover",function (d,i){
+               d3.selectAll("path").style("opacity",function (d,j){
+                
+                if (i!=j)
+                    return 0.9;
+
+               });
+               
+        })
+        .on("mouseout",function(d,i){
+            d3.selectAll("path").style("opacity",1);
+        })
+        .on("mousemove",function (d,i){
+            d3.selectAll("path").style("opacity",function (d,j){
+                //debugger;
+                if (i!=j)
+                    return 0.9;
+
+               });
+            
+        });
+        
+        svg.insert("text").text("Art Deco").attr("x",10).attr("y","300").style("font-size","20");
+        svg.insert("text").text("Bauhaus").attr("x",7).attr("y","125").style("font-size","15");
+        svg.insert("text").text("Social").attr("x",100).attr("y","150").style("font-size","20");
+        svg.insert("text").text("Realism").attr("x",100).attr("y","170").style("font-size","20");
+        svg.insert("text").text("Street Art").attr("x",750).attr("y","340").style("font-size","16");
+        svg.insert("text").text("Minimalism").attr("x",750).attr("y","285").style("font-size","16");
+        svg.insert("text").text("Digital").attr("x",1100).attr("y","260").style("font-size","20");
+        svg.insert("text").text("Pop Art").attr("x",720).attr("y","150").style("font-size","25");
+        svg.insert("text").text("Typography").attr("x",970).attr("y","60").style("font-size","23");
+        svg.insert("text").text("New York School").attr("x",200).attr("y","100").style("font-size","28");
+        
+}
+</script>
+
+</html>
