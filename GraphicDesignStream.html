@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 </head>
 <style type="text/css">
+
 .chart{
     text-align: center;
     width:100%;
@@ -18,6 +19,9 @@
     text-align: center;
     border: none !important;
     
+}
+.viz svg{
+    fill:"url(#diagonalHatch)";
 }
 .container-fluid{
     border-bottom: 1px solid grey;
@@ -83,13 +87,30 @@ path{
 mark{
     background-color: #FF6B6B;
     color: white;
+    opacity:0.7;
 }
 a{
     font-color: white;
 }
 line{
-    stroke: black;
+    stroke: white;
     stroke-width:2px;
+}
+
+div.toolt {
+        color: #222;
+        background-color: #fff;
+        padding: .5em;
+        border:1px solid rgba(0,0,0,0.5);
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        
+        position: absolute;
+        white-space: pre;
+        
+        box-shadow: 2px 2px 2px rgba(169,169,169,0.5);
+        z-index:10;
+        text-align:left;
 }
 .xaxis p{
     align: left;
@@ -131,7 +152,7 @@ line{
     </div>
     <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
         <div class="writeUp container-fluid">
-        <p class="lead"><mark>Graphic Design</mark> has always been a rapidly evolving field. It's examples can be found in the hundreds of drawings of animals in the Chauvet caves, dating back to 14,000 BC to the designs of the primitive hunters in the Bhimkbekta rock shelters in India. Examples can be found in religious text like the Qu'ran. Early maps and calligraphy specimens are some of the various examples of graphic design from history.</p>
+        <p class="lead"><mark>Graphic Design</mark> has always been a rapidly evolving field. Its examples can be found in the hundreds of drawings of animals in the Chauvet caves, dating back to 14,000 BC to the designs of the primitive hunters in the Bhimkbekta rock shelters in India. Examples can be found in religious text like the Qu'ran. Early maps and calligraphy specimens are some of the various examples of graphic design from history.</p>
         <p class="lead"> The past 200 years have been especially active in terms of graphic design movements and schools with the schools and designers around the world continuously innovating and changing the field. Designers and artists around the world were continuously changing the way people saw things.</p>
         <p class="lead">The purpose of this visualization is to throws light and show some of the more popular design movements since 1930. This is by no means an exhaustive list and there are many more that were very niche and localised to certain geographic regions which I did not find sufficient data for and hence did not show them here.</p>
         </div>
@@ -143,7 +164,11 @@ line{
         <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
     </div>
 </div>
-    
+<pattern id="diagonalHatch" patternUnits="UserSpaceOnUse" width="4" height="4">
+    <path d="M-1,1 12,-2
+             M0,4 14,-4
+             M3,5 12,-2" />
+</pattern>
 <div class="container-fluid viz">
     <div class="chart" >
         <div class="container alter" style="text-align:left;">
@@ -176,8 +201,8 @@ line{
 <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="explanation container-fluid">
         <h2 style="text-align:left; color:black;">Explanation</h2>
-        <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- <a href="http://www.d3js.org/d3.v3.js">D3.js</a> and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this graphic for that year. So, essentially, this visualization shows the popularity of the given movements <mark>relative to each other</mark>. </p>
-        <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="http://www.artsy.com" >Artsy</a> and <a href="http://www.wikiart.org">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
+        <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- D3.js and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this graphic for that year. So, essentially, this visualization represents the shown movements <mark>relative to each other</mark>. </p>
+        <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="www.artsy.com" >Artsy</a> and <a href="www.wikiart.org" role="button">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
         <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my github repo.</p>
     </div>
 </div>
@@ -185,7 +210,7 @@ line{
     <div class="about container-fluid">
         <h3 style="text-align:left; color:black;">About Me</h3>
         <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am really interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
-        <p class="lead">Find me on my <a href="http://www.be.net/manshar">behance profile</a> or email me at- sharma.manas271196@gmail.com</p>
+        <p class="lead">Find me on my <a href="be.net/manshar">behance profile</a> or email me at- sharma.manas271196@gmail.com</p>
         
     </div>
 </div>
@@ -207,7 +232,8 @@ line{
     //debugger;
     function makechart(){
     streamgraph=d3.stack().keys(["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"]);
-    names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    var names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    var move_names=["Art Deco","Bauhaus","Socal Realism","Street Art","Minimalism","Digital","Pop Art","Typography","New York School"];
     //debugger;
     stream=streamgraph(dataset);
     
@@ -220,14 +246,15 @@ line{
             return d[0];
         });
     });
-    var line=d3.select("svg").insert("line");
+    var tool=d3.select(".chart").append("div").attr("class","toolt");
+    var line=d3.select("svg").append("line").attr("y1",0).attr("y2",360).classed("hidden",true);
     //svg.append("g");
     //debugger;
     svg.attr("width",width).attr("height",height);
     area=d3.area().x(function (d){return width*(+d.data.Year-1930)/years}).y0(function (d){return height-d[0]*height/maxy;}).y1(function (d){return height-d[1]*height/maxy;}).curve(d3.curveBasis);
     //debugger;/
         var path = g.selectAll("path").data(stream).enter().append("path").attr("class","area").attr("d",function (d){
-            return area(d);}).style("fill",function (d,i){return colours[i];})on("mouseover",function (d,i){
+            return area(d);}).style("fill",function (d,i){return colours[i];}).on("mouseover",function (d,i){
                d3.selectAll("path").each(function(d,j){
                 //debugger;
                 d3.select(this).style("opacity",function (){                
