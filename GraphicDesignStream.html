@@ -227,26 +227,36 @@ line{
     area=d3.area().x(function (d){return width*(+d.data.Year-1930)/years}).y0(function (d){return height-d[0]*height/maxy;}).y1(function (d){return height-d[1]*height/maxy;}).curve(d3.curveBasis);
     //debugger;/
         var path = g.selectAll("path").data(stream).enter().append("path").attr("class","area").attr("d",function (d){
-            return area(d);}).style("fill",function (d,i){return colours[i];}).on("mouseover",function (d,i){
-               d3.selectAll("path").style("opacity",function (d,j){
-                
-                if (i!=j)
-                    return 0.9;
-
+            return area(d);}).style("fill",function (d,i){return colours[i];})on("mouseover",function (d,i){
+               d3.selectAll("path").each(function(d,j){
+                //debugger;
+                d3.select(this).style("opacity",function (){                
+                        if (i!=(j-1))
+                            return 0.9;
                });
-               
-        })
-        .on("mouseout",function(d,i){
+                var mouse=d3.mouse(this);
+                tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                tool.append("span").style("font-size","10px").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*85/1200));
+               //debugger;
+        });
+           })
+        .on("mouseout",function(){
             d3.selectAll("path").style("opacity",1);
+            line.classed("hidden",true);
+            //tool.style("opacity",0)
+            //tool.selectAll("*").remove();
         })
         .on("mousemove",function (d,i){
-            d3.selectAll("path").style("opacity",function (d,j){
+             
+            var mouse=d3.mouse(this);
+                var hover_year=d3.format("d")(mouse[0]*85/1200);
                 //debugger;
-                if (i!=j)
-                    return 0.9;
-
-               });
-            
+                tool.selectAll("*").remove();
+                tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*85/1200));
+                line.attr("x1",mouse[0]-10).attr("x2",mouse[0]-10).classed("hidden",false);
         });
         
         svg.insert("text").text("Art Deco").attr("x",10).attr("y","300").style("font-size","20");
