@@ -234,19 +234,21 @@ line{
                     return 0.9;
 
                });
-               
+               //debugger;
+                var mouse=d3.mouse(this);
+                var hover_year=d3.format("d")(mouse[0]*85/1200);
+
+               // debugger;
+                line.attr("x1",mouse[0]).attr("x2",mouse[0]).attr("y1",(height-d[hover_year][0]*height/maxy)).attr("y2",(height-(d[hover_year][1]*height/maxy)+0.1));
         })
         .on("mouseout",function(d,i){
             d3.selectAll("path").style("opacity",1);
         })
         .on("mousemove",function (d,i){
-            d3.selectAll("path").style("opacity",function (d,j){
-                //debugger;
-                if (i!=j)
-                    return 0.9;
-
-               });
-            
+            var mouse=d3.mouse(this);
+                var hover_year=d3.format("d")(mouse[0]*85/1200);
+                debugger;
+                line.attr("x1",mouse[0]).attr("x2",mouse[0]).attr("y1",(height-d[hover_year][0]*height/maxy)).attr("y2",(height-(d[hover_year][1]*height/maxy)+0.1));
         });
         
         svg.insert("text").text("Art Deco").attr("x",10).attr("y","300").style("font-size","20");
