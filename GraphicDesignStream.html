@@ -116,9 +116,6 @@ div.toolt {
     align: left;
     font-size: 15px;
 }
-{
-    width: 1200px;
-}
 .alter{
     width: 1200px;
 }
@@ -136,6 +133,9 @@ div.toolt {
 .details{
     text-align: center;
     width: 1000px;
+}
+.imp line{
+    stroke-width:4px !important;
 }
 .about{
      width: 1000px;
@@ -164,11 +164,6 @@ div.toolt {
         <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
     </div>
 </div>
-<pattern id="diagonalHatch" patternUnits="UserSpaceOnUse" width="4" height="4">
-    <path d="M-1,1 12,-2
-             M0,4 14,-4
-             M3,5 12,-2" />
-</pattern>
 <div class="container-fluid viz">
     <div class="chart" >
         <div class="container alter" style="text-align:left;">
@@ -230,9 +225,11 @@ div.toolt {
     });
     var svg,g,area;
     //debugger;
+
     function makechart(){
-    streamgraph=d3.stack().keys(["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"]);
     var names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    streamgraph=d3.stack().keys(names);
+    
     var move_names=["Art Deco","Bauhaus","Socal Realism","Street Art","Minimalism","Digital","Pop Art","Typography","New York School"];
     //debugger;
     stream=streamgraph(dataset);
@@ -247,7 +244,7 @@ div.toolt {
         });
     });
     var tool=d3.select(".chart").append("div").attr("class","toolt");
-    var line=d3.select("svg").append("line").attr("y1",0).attr("y2",360).classed("hidden",true);
+    var line=d3.select("svg").append("line").attr("class","tooline").attr("y1",0).attr("y2",360).classed("hidden",true);
     //svg.append("g");
     //debugger;
     svg.attr("width",width).attr("height",height);
@@ -296,8 +293,56 @@ div.toolt {
         svg.insert("text").text("Pop Art").attr("x",720).attr("y","150").style("font-size","25");
         svg.insert("text").text("Typography").attr("x",970).attr("y","60").style("font-size","23");
         svg.insert("text").text("New York School").attr("x",200).attr("y","100").style("font-size","28");
-        
-}
+
+        var imp=[];
+        d3.csv("imp.csv",function (data){
+            imp=data;
+            makeimp(imp);
+        });
+        //debugger;        
+        function makeimp (imp){
+            
+                
+                svg.selectAll(".imp").data(imp).enter().append("circle").attr("class","imp")
+                .style("stroke","black")
+                .style("fill","white")
+                .style("opacity",.9)
+                .attr("cy",function(d){return height-(stream[+d.Index][+d.Year-1930][0]+stream[+d.Index][+d.Year-1930][1])*height/(2*maxy)})
+                //.attr("y2",function(d){return height-stream[+d.Index][+d.Year-1930][1]*height/maxy})
+                .attr("cx",function(d){return (width*(+d.Year-1930)/years);})
+                .attr("r","10px")            
+                .on("mouseover",function (d,i){
+                var val=d;
+                var index=val.Index;
+                //debugger;
+                var year=+val.Year-1930;
+                //debugger;
+                var y1=height-height*(stream[index][year][0])/maxy;
+                var y2=height-height*(stream[index][year][1])/maxy;
+                var x=width*year/years;
+                    tool.style("opacity",0);
+                    tool.selectAll("*").remove();
+                    //debugger;
+                    tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX +30) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                    tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(val.Movement+"\n");
+                    tool.append("img").attr("src",val.url).style("max-height","150px");
+                    tool.append("span").style("font-size","12px").style("font-weight","light").style("text-align","left").text("\n"+val.Name+","+(year+1930)+"\n");
+                    tool.append("span").style("font-size","9px").style("font-weight","light").style("text-align","left").style("font-style","italic").text(val.source+"\n");
+
+
+                })
+                .on("mouseout",function(){
+                    tool.style("opacity",0);
+                    tool.selectAll("*").remove();
+                });
+
+            }
+        }
+        //debugger;
+
+
+
 </script>
 
 </html>
