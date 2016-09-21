@@ -37,7 +37,7 @@ body{
 
     font-weight: 200px;
 }
-p{
+.ihavenoideawhyineedthisidontunderstandcssanymore p{
     text-align: justify;
 }
 path{
@@ -113,8 +113,12 @@ div.toolt {
         text-align:left;
 }
 .xaxis p{
-    align: left;
+    
     font-size: 15px;
+    
+}
+.xaxis .col-md-4{
+    padding: 0px !important;
 }
 .alter{
     width: 1200px;
@@ -161,31 +165,31 @@ div.toolt {
     <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="howto container-fluid">
         <h2 style="text-align:left; color:black;">How to read this visualization</h2>
-        <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
+        <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. Hover over the white circles to see an image of a design and the name of the designer who made it during that year in the movement you are hovering over. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
     </div>
 </div>
 <div class="container-fluid viz">
     <div class="chart" >
-        <div class="container alter" style="text-align:left;">
+        <div class="container alter" >
             <div class="row xaxis">
                 <div class="col-md-4">
-                    <div class="row">
+                    <div class="row" style="text-align:left !important;">
                         <div class="col-md-4"><p >1930</p></div>
-                        <div class="col-md-4"><p>1940</p></div>
-                        <div class="col-md-4"><p>1950</p></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="col-md-4"><p>1960</p></div>
-                        <div class="col-md-4"><p>1970</p></div>
-                        <div class="col-md-4"><p>1980</p></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><p>Years</p></div>
+                        <div class="col-md-4"></div>
                     </div>                            
                 </div>
                 <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-4"><p>1990</p></div>
-                        <div class="col-md-4"><p>2000</p></div>
+                    <div class="row" style="text-align:right !important;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-4"><p>2010</p></div>
                     </div>
                 </div>
@@ -198,13 +202,13 @@ div.toolt {
         <h2 style="text-align:left; color:black;">Explanation</h2>
         <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- <a href="http://www.d3js.org/d3.v3.js">D3.js</a> and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this graphic for that year. So, essentially, this visualization represents the shown movements <mark>relative to each other</mark>. </p>
         <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="http://www.artsy.net" >Artsy</a> and <a href="http://www.wikiart.org" role="button">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
-        <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my github repo.</p>
+        <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my <a href="http://github.com/manas271196/Graphic-Design-Movements-Streamgraph">github repo</a>.</p>
     </div>
 </div>
         <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="about container-fluid">
         <h3 style="text-align:left; color:black;">About Me</h3>
-        <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am really interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
+        <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
         <p class="lead">Find me on my <a href="http://www.be.net/manshar">behance profile</a> or email me at- sharma.manas271196@gmail.com</p>
         
     </div>
@@ -213,7 +217,7 @@ div.toolt {
     
 <script>
     var num = 9;
-    var years=86;
+    var years=80;
     var colours=["#4EC6E4","#70C27E","#99C76B","#FFC533","#F9C89E","#F9B17B","#CB6C67","#F0903E","#FFC533"];
    
     width = 1200,
@@ -255,13 +259,13 @@ div.toolt {
                d3.selectAll("path").each(function(d,j){
                 //debugger;
                 d3.select(this).style("opacity",function (){                
-                        if (i!=j)
+                        if (i!=(j))
                             return 0.9;
                });
                 var mouse=d3.mouse(this);
                 tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
                            'px; top:' + (d3.event.pageY - 80) + 'px');
-                tool.append("span").style("font-size","10px").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*85/1200));
+                tool.append("span").style("font-size","10px").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*years/1200));
                //debugger;
         });
            })
@@ -274,12 +278,12 @@ div.toolt {
         .on("mousemove",function (d,i){
              
             var mouse=d3.mouse(this);
-                var hover_year=d3.format("d")(mouse[0]*85/1200);
+                var hover_year=d3.format("d")(mouse[0]*years/1200);
                 //debugger;
                 tool.selectAll("*").remove();
                 tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
                            'px; top:' + (d3.event.pageY - 80) + 'px');
-                tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*85/1200));
+                tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*years/1200));
                 line.attr("x1",mouse[0]-10).attr("x2",mouse[0]-10).classed("hidden",false);
         });
         
@@ -287,11 +291,11 @@ div.toolt {
         svg.insert("text").text("Bauhaus").attr("x",7).attr("y","125").style("font-size","15");
         svg.insert("text").text("Social").attr("x",100).attr("y","150").style("font-size","20");
         svg.insert("text").text("Realism").attr("x",100).attr("y","170").style("font-size","20");
-        svg.insert("text").text("Street Art").attr("x",750).attr("y","340").style("font-size","16");
+        svg.insert("text").text("Street Art").attr("x",800).attr("y","337").style("font-size","16");
         svg.insert("text").text("Minimalism").attr("x",750).attr("y","285").style("font-size","16");
-        svg.insert("text").text("Digital").attr("x",1100).attr("y","260").style("font-size","20");
+        svg.insert("text").text("Digital").attr("x",1130).attr("y","260").style("font-size","20");
         svg.insert("text").text("Pop Art").attr("x",720).attr("y","150").style("font-size","25");
-        svg.insert("text").text("Typography").attr("x",970).attr("y","60").style("font-size","23");
+        svg.insert("text").text("Typography").attr("x",970).attr("y","55").style("font-size","23");
         svg.insert("text").text("New York School").attr("x",200).attr("y","100").style("font-size","28");
 
         var imp=[];
