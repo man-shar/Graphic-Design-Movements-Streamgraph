@@ -2,11 +2,12 @@
 <html>
 <head>
     <title>Streamgraph</title>
-    <script src="http://d3js.org/d3.v4.js"></script>
+    <script src="d3.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 </head>
 <style type="text/css">
+
 .chart{
     text-align: center;
     width:100%;
@@ -18,6 +19,9 @@
     text-align: center;
     border: none !important;
     
+}
+.viz svg{
+    fill:"url(#diagonalHatch)";
 }
 .container-fluid{
     border-bottom: 1px solid grey;
@@ -33,7 +37,7 @@ body{
 
     font-weight: 200px;
 }
-p{
+.ihavenoideawhyineedthisidontunderstandcssanymore p{
     text-align: justify;
 }
 path{
@@ -83,20 +87,38 @@ path{
 mark{
     background-color: #FF6B6B;
     color: white;
+    opacity:0.7;
 }
 a{
     font-color: white;
 }
 line{
-    stroke: black;
+    stroke: white;
     stroke-width:2px;
 }
-.xaxis p{
-    align: left;
-    font-size: 15px;
+
+div.toolt {
+        color: #222;
+        background-color: #fff;
+        padding: .5em;
+        border:1px solid rgba(0,0,0,0.5);
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        
+        position: absolute;
+        white-space: pre;
+        
+        box-shadow: 2px 2px 2px rgba(169,169,169,0.5);
+        z-index:10;
+        text-align:left;
 }
-{
-    width: 1200px;
+.xaxis p{
+    
+    font-size: 15px;
+    
+}
+.xaxis .col-md-4{
+    padding: 0px !important;
 }
 .alter{
     width: 1200px;
@@ -116,6 +138,9 @@ line{
     text-align: center;
     width: 1000px;
 }
+.imp line{
+    stroke-width:4px !important;
+}
 .about{
      width: 1000px;
     text-align: justify;
@@ -131,7 +156,7 @@ line{
     </div>
     <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
         <div class="writeUp container-fluid">
-        <p class="lead"><mark>Graphic Design</mark> has always been a rapidly evolving field. It's examples can be found in the hundreds of drawings of animals in the Chauvet caves, dating back to 14,000 BC to the designs of the primitive hunters in the Bhimkbekta rock shelters in India. Examples can be found in religious text like the Qu'ran. Early maps and calligraphy specimens are some of the various examples of graphic design from history.</p>
+        <p class="lead"><mark>Graphic Design</mark> has always been a rapidly evolving field. Its examples can be found in the hundreds of drawings of animals in the Chauvet caves, dating back to 14,000 BC to the designs of the primitive hunters in the Bhimkbekta rock shelters in India. Examples can be found in religious text like the Qu'ran. Early maps and calligraphy specimens are some of the various examples of graphic design from history.</p>
         <p class="lead"> The past 200 years have been especially active in terms of graphic design movements and schools with the schools and designers around the world continuously innovating and changing the field. Designers and artists around the world were continuously changing the way people saw things.</p>
         <p class="lead">The purpose of this visualization is to throws light and show some of the more popular design movements since 1930. This is by no means an exhaustive list and there are many more that were very niche and localised to certain geographic regions which I did not find sufficient data for and hence did not show them here.</p>
         </div>
@@ -140,32 +165,31 @@ line{
     <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="howto container-fluid">
         <h2 style="text-align:left; color:black;">How to read this visualization</h2>
-        <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
+        <p class="lead" style="color:black;" >Different graphic design movements are shown as different coloured "streams" on this streamgraph. The <mark>thickness</mark> (and not position on y axis) being representative of the popularity of that movement during that time. The x axis is <mark>time in years</mark>. Hover over the white circles to see an image of a design and the name of the designer who made it during that year in the movement you are hovering over. If you want more details on how I made this visualizaion, head down to the "Explanation" section.</p>
     </div>
 </div>
-    
 <div class="container-fluid viz">
     <div class="chart" >
-        <div class="container alter" style="text-align:left;">
+        <div class="container alter" >
             <div class="row xaxis">
                 <div class="col-md-4">
-                    <div class="row">
+                    <div class="row" style="text-align:left !important;">
                         <div class="col-md-4"><p >1930</p></div>
-                        <div class="col-md-4"><p>1940</p></div>
-                        <div class="col-md-4"><p>1950</p></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="col-md-4"><p>1960</p></div>
-                        <div class="col-md-4"><p>1970</p></div>
-                        <div class="col-md-4"><p>1980</p></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"><p>Years</p></div>
+                        <div class="col-md-4"></div>
                     </div>                            
                 </div>
                 <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-4"><p>1990</p></div>
-                        <div class="col-md-4"><p>2000</p></div>
+                    <div class="row" style="text-align:right !important;">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-4"><p>2010</p></div>
                     </div>
                 </div>
@@ -176,15 +200,15 @@ line{
 <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="explanation container-fluid">
         <h2 style="text-align:left; color:black;">Explanation</h2>
-        <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- <a href="http://www.d3js.org/d3.v3.js">D3.js</a> and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this visualization for that year. So, essentially, this visualization shows the popularity of the given movements <mark>relative to each other</mark>. </p>
-        <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="http://www.artsy.com" >Artsy</a> and <a href="http://www.wikiart.org">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
-        <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my github repo.</p>
+        <p class="lead" style="color:black;" >To make this visualization, I basically used two tools- <a href="http://www.d3js.org/d3.v3.js">D3.js</a> and Python. I took the works made in these graphic design genres with the year in which they were made and then found the percentage of artworks of that particular genre by dividing it by the sum of all the works in all genres shown in this graphic for that year. So, essentially, this visualization represents the shown movements <mark>relative to each other</mark>. </p>
+        <p class="lead">For scraping the data, I used python to download the works in the genres from two websites- <a href="http://www.artsy.net" >Artsy</a> and <a href="http://www.wikiart.org" role="button">WikiArt</a>. After getting the data, I made a sheet of it with rows from 1930 to 2015. Each column being a movement and the entry for that column in a particular year(row) being the number of works from that year in the data. The I found the percentage of the numbers as described above and then just some D3.js magic to make this streamgraph using the data.</p>
+        <p class="lead">If you are interested in the code used for the scraper and the visualisation, head over to my <a href="http://github.com/manas271196/Graphic-Design-Movements-Streamgraph">github repo</a>.</p>
     </div>
 </div>
         <div class="ihavenoideawhyineedthisidontunderstandcssanymore">
     <div class="about container-fluid">
         <h3 style="text-align:left; color:black;">About Me</h3>
-        <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am really interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
+        <p class="lead">Hi! My name is Manas Sharma. I am an undergraduate student at the Department of Design at Indian Institute of technology, Guwahati. I am interested in data visualization right from the initial phases of designing it to coding it. I also like sketching and playing/listening to music. Thanks for stopping by!</p>
         <p class="lead">Find me on my <a href="http://www.be.net/manshar">behance profile</a> or email me at- sharma.manas271196@gmail.com</p>
         
     </div>
@@ -193,7 +217,7 @@ line{
     
 <script>
     var num = 9;
-    var years=86;
+    var years=80;
     var colours=["#4EC6E4","#70C27E","#99C76B","#FFC533","#F9C89E","#F9B17B","#CB6C67","#F0903E","#FFC533"];
    
     width = 1200,
@@ -205,9 +229,12 @@ line{
     });
     var svg,g,area;
     //debugger;
+
     function makechart(){
-    streamgraph=d3.stack().keys(["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"]);
-    names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    var names=["ArtDecoValue","BauhausValue","SocialRealismValue","StreetArtValue","MinimalismValue","DigitalValue","PopArtValue","TypographyValue","NYSValue"];
+    streamgraph=d3.stack().keys(names);
+    
+    var move_names=["Art Deco","Bauhaus","Socal Realism","Street Art","Minimalism","Digital","Pop Art","Typography","New York School"];
     //debugger;
     stream=streamgraph(dataset);
     
@@ -220,7 +247,8 @@ line{
             return d[0];
         });
     });
-    var line=d3.select("svg").insert("line");
+    var tool=d3.select(".chart").append("div").attr("class","toolt");
+    var line=d3.select("svg").append("line").attr("class","tooline").attr("y1",0).attr("y2",360).classed("hidden",true);
     //svg.append("g");
     //debugger;
     svg.attr("width",width).attr("height",height);
@@ -228,39 +256,97 @@ line{
     //debugger;/
         var path = g.selectAll("path").data(stream).enter().append("path").attr("class","area").attr("d",function (d){
             return area(d);}).style("fill",function (d,i){return colours[i];}).on("mouseover",function (d,i){
-               d3.selectAll("path").style("opacity",function (d,j){
-                
-                if (i!=j)
-                    return 0.9;
-
+               d3.selectAll("path").each(function(d,j){
+                //debugger;
+                d3.select(this).style("opacity",function (){                
+                        if (i!=(j))
+                            return 0.9;
                });
-               
-        })
-        .on("mouseout",function(d,i){
+                var mouse=d3.mouse(this);
+                tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                tool.append("span").style("font-size","10px").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*years/1200));
+               //debugger;
+        });
+           })
+        .on("mouseout",function(){
             d3.selectAll("path").style("opacity",1);
+            line.classed("hidden",true);
+            tool.style("opacity",0);
+            tool.selectAll("*").remove();
         })
         .on("mousemove",function (d,i){
-            d3.selectAll("path").style("opacity",function (d,j){
+             
+            var mouse=d3.mouse(this);
+                var hover_year=d3.format("d")(mouse[0]*years/1200);
                 //debugger;
-                if (i!=j)
-                    return 0.9;
-
-               });
-            
+                tool.selectAll("*").remove();
+                tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX -10) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(move_names[i]+"\n"+d3.format("d")(1930+mouse[0]*years/1200));
+                line.attr("x1",mouse[0]-10).attr("x2",mouse[0]-10).classed("hidden",false);
         });
         
         svg.insert("text").text("Art Deco").attr("x",10).attr("y","300").style("font-size","20");
         svg.insert("text").text("Bauhaus").attr("x",7).attr("y","125").style("font-size","15");
         svg.insert("text").text("Social").attr("x",100).attr("y","150").style("font-size","20");
         svg.insert("text").text("Realism").attr("x",100).attr("y","170").style("font-size","20");
-        svg.insert("text").text("Street Art").attr("x",750).attr("y","340").style("font-size","16");
+        svg.insert("text").text("Street Art").attr("x",800).attr("y","337").style("font-size","16");
         svg.insert("text").text("Minimalism").attr("x",750).attr("y","285").style("font-size","16");
-        svg.insert("text").text("Digital").attr("x",1100).attr("y","260").style("font-size","20");
+        svg.insert("text").text("Digital").attr("x",1130).attr("y","260").style("font-size","20");
         svg.insert("text").text("Pop Art").attr("x",720).attr("y","150").style("font-size","25");
-        svg.insert("text").text("Typography").attr("x",970).attr("y","60").style("font-size","23");
+        svg.insert("text").text("Typography").attr("x",970).attr("y","55").style("font-size","23");
         svg.insert("text").text("New York School").attr("x",200).attr("y","100").style("font-size","28");
-        
-}
+
+        var imp=[];
+        d3.csv("imp.csv",function (data){
+            imp=data;
+            makeimp(imp);
+        });
+        //debugger;        
+        function makeimp (imp){
+            
+                
+                svg.selectAll(".imp").data(imp).enter().append("circle").attr("class","imp")
+                .style("stroke","black")
+                .style("fill","white")
+                .style("opacity",.9)
+                .attr("cy",function(d){return height-(stream[+d.Index][+d.Year-1930][0]+stream[+d.Index][+d.Year-1930][1])*height/(2*maxy)})
+                //.attr("y2",function(d){return height-stream[+d.Index][+d.Year-1930][1]*height/maxy})
+                .attr("cx",function(d){return (width*(+d.Year-1930)/years);})
+                .attr("r","10px")            
+                .on("mouseover",function (d,i){
+                var val=d;
+                var index=val.Index;
+                //debugger;
+                var year=+val.Year-1930;
+                //debugger;
+                var y1=height-height*(stream[index][year][0])/maxy;
+                var y2=height-height*(stream[index][year][1])/maxy;
+                var x=width*year/years;
+                    tool.style("opacity",0);
+                    tool.selectAll("*").remove();
+                    //debugger;
+                    tool.attr("style","opacity:"+1+";left:" + (d3.event.pageX +30) +
+                           'px; top:' + (d3.event.pageY - 80) + 'px');
+                    tool.append("span").style("font-size","12px").style("font-weight","bold").style("text-align","left").text(val.Movement+"\n");
+                    tool.append("img").attr("src",val.url).style("max-height","150px");
+                    tool.append("span").style("font-size","12px").style("font-weight","light").style("text-align","left").text("\n"+val.Name+","+(year+1930)+"\n");
+                    tool.append("span").style("font-size","9px").style("font-weight","light").style("text-align","left").style("font-style","italic").text(val.source+"\n");
+
+
+                })
+                .on("mouseout",function(){
+                    tool.style("opacity",0);
+                    tool.selectAll("*").remove();
+                });
+
+            }
+        }
+        //debugger;
+
+
+
 </script>
 
 </html>
